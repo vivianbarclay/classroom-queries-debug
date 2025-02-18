@@ -7,17 +7,18 @@ class DepartmentsController < ApplicationController
 
   def show
     the_id = params.fetch("path_id")
-    @department = Department.where({:id => the_id })
+    matching_department = Department.where({ :id => the_id })
+    @department = matching_department.at(0)
 
     render({ :template => "departments/show" })
   end
 
   def create
-    @department = Department.new
-    @department.name = params.fetch("query_name")
+    department = Department.new
+    department.name = params[:name]
 
-    if @department.valid?
-      @department.save
+    if department.valid?
+      department.save
       redirect_to("/departments", { :notice => "Department created successfully." })
     else
       redirect_to("/departments", { :notice => "Department failed to create successfully." })
@@ -26,9 +27,10 @@ class DepartmentsController < ApplicationController
 
   def update
     the_id = params.fetch("path_id")
-    @department = Department.where({ :id => the_id }).at(0)
+    matching_department = Department.where({ :id => the_id })
+    @department = matching_department.at(0)
 
-    @department.name = params.fetch("query_name")
+    @department.name = params[:name]
 
     if @department.valid?
       @department.save
@@ -40,7 +42,8 @@ class DepartmentsController < ApplicationController
 
   def destroy
     the_id = params.fetch("path_id")
-    @department = Department.where({ :id => the_id }).at(0)
+    matching_department = Department.where({ :id => the_id })
+    @department = matching_department.at(0)
 
     @department.destroy
 

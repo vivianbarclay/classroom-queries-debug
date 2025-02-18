@@ -6,27 +6,27 @@
 
 <form action="/insert_student" method="post">
   <div>
-    <label for="email_box">
+    <label for="email">
       Email
     </label>
 
-    <input type="text" id="email_box" name="query_email">
+    <input type="text" id="email" name="email">
   </div>
 
   <div>
-    <label for="first_name_box">
+    <label for="first_name">
       First name
     </label>
 
-    <input type="text" id="first_name_box" name="query_name">
+    <input type="text" id="first_name" name="first_name">
   </div>
 
   <div>
-    <label for="last_name_box">
+    <label for="last_name">
       Last name
     </label>
 
-    <input type="text" id="last_name_box" name="query_last_name">
+    <input type="text" id="last_name" name="last_name">
   </div>
 
   <button>
@@ -58,7 +58,7 @@
     </th>
   </tr>
 
-  <% @students.eac do |student| %>
+  <% @students.each do |student| %>
     <tr>
       <td>
         <%= student.id %>
@@ -77,7 +77,7 @@
       </td>
 
       <td>
-        <a href="/students/<%= student %>">
+        <a href="/students/<%= student.id %>">
           Show details
         </a>
       </td>
